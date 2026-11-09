@@ -1,0 +1,32 @@
+# Model registry. The benchmark is model-agnostic: add an entry here and it joins every run it fits.
+# adapter: decision_api (returns probabilities) or openai_chat (verbalized one-hot, top-1 scoring only).
+# usable window = window * 0.9. A model only runs at lengths that fit.
+models:
+  - id: snap
+    display: Snap 1.1
+    adapter: decision_api
+    base_url: https://api.subq.ai
+    path: /v1/systemone
+    api_key_env: SUBQ_API_KEY
+    model_id: subq-snap-1.1
+    window: 393216
+    price_input_per_m: 0.04
+    budget_capped: true
+  - id: jev
+    display: Jev 1.14
+    adapter: decision_api
+    base_url_env: NEON_AI_GATEWAY_BASE_URL
+    path: /typesafe/v1/systemone
+    api_key_env: NEON_AI_GATEWAY_TOKEN
+    model_id: typesafeai-jev-1-14-0
+    window: 65536
+    price_input_per_m: 0.042
+  - id: openjev
+    display: OpenJev (Qwen 3.5 4B)
+    adapter: decision_api
+    base_url_env: NEON_AI_GATEWAY_BASE_URL
+    path: /typesafe/v1/systemone
+    api_key_env: NEON_AI_GATEWAY_TOKEN
+    model_id: openjev-qwen35-4b
+    window: 131072
+    price_input_per_m: 0.042

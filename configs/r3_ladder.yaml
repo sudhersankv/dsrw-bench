@@ -1,0 +1,24 @@
+# Spec "Core sweeps" R3. Both pair sides run for every seed. The shuffled arm uses one lag per rung
+# and length (lag 100, the first lag H2 reads); shuffling removes position, so the lag only places the block.
+run_id: r3_ladder
+root_seed: 103
+seeds: {start: 0, count: 20}
+replicates: 1
+concurrency: 4
+tokens_per_day: 8
+requires_calibration: true
+model_limits:
+  jev: {max_tokens: 16000}
+  openjev: {max_tokens: 16000}
+rate_limits:
+  NEON_AI_GATEWAY_TOKEN: 200000
+cells:
+  - world: ladder
+    rungs: [n1, n9, statistical]
+    lengths_tokens: [16000, 128000]
+    lags:
+      16000: [1, 3, 10, 100, 300, 1000, 1900]
+      128000: [1, 3, 10, 100, 300, 1000, 1900, 5000, 15000]
+    shuffled_lag: 100
+    policies: [raw]
+    question_keys: [report, decide, find]

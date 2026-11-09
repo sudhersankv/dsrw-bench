@@ -1,0 +1,12 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.hypothesis/
+dist/
+node_modules/
+out/
+*.parquet
+web/public/data/*
+!web/public/data/.gitkeep

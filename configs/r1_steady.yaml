@@ -1,0 +1,24 @@
+# Spec "Core sweeps" R1. W1000 is dropped automatically where the diary is 1,000 days or shorter.
+run_id: r1_steady
+root_seed: 101
+seeds: {start: 0, count: 30}
+replicates: 1
+concurrency: 4
+tokens_per_day: 8
+requires_calibration: true
+model_limits:
+  jev: {max_tokens: 56000}
+  openjev: {max_tokens: 112000}
+rate_limits:
+  NEON_AI_GATEWAY_TOKEN: 200000
+cells:
+  - world: steady
+    contrasts: ["7pt"]
+    lengths_tokens: [1000, 4000, 16000, 56000]
+    policies: [raw, w1000, table, oracle]
+    question_keys: [risk, act]
+  - world: steady
+    contrasts: ["2pt"]
+    lengths_tokens: [56000, 112000, 256000]
+    policies: [raw, w1000, table, oracle]
+    question_keys: [risk, act]

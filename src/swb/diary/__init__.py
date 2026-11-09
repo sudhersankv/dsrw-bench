@@ -1,0 +1,1 @@
+"""Diary generation and rendering."""

@@ -1,0 +1,128 @@
+# Spec pilot and format checks. Seeds come from a reserved range and are never analysed.
+# Run in order: the latency probes depend on cold, repeat and append following each other.
+run_id: pilot
+root_seed: 100
+seeds: {start: 1000000, count: 5}
+replicates: 1
+concurrency: 1
+tokens_per_day: 8
+rate_limits:
+  NEON_AI_GATEWAY_TOKEN: 200000
+cells:
+  # Non-determinism: same request twice.
+  - world: steady
+    tag: nondeterminism
+    contrasts: ["7pt"]
+    lengths_tokens: [16000]
+    policies: [raw]
+    question_keys: [risk, act]
+    repeats: 2
+  # Prior bias: empty diary.
+  - world: steady
+    tag: prior-bias
+    contrasts: ["7pt"]
+    lengths_days: [0]
+    policies: [raw]
+    question_keys: [risk, act]
+    seeds: {start: 1000000, count: 12}
+  # Oracle failure.
+  - world: steady
+    tag: oracle
+    contrasts: ["7pt"]
+    lengths_tokens: [16000]
+    policies: [oracle]
+    question_keys: [risk, act]
+  # Reading control. The spec's 90/50/50/10 rates are not a contrast in contracts.py; "high" is the
+  # strongest available contrast.
+  - world: steady
+    tag: reading-control
+    contrasts: [high]
+    lengths_days: [2000]
+    policies: [raw]
+    question_keys: [risk, act]
+    seeds: {start: 1000000, count: 10}
+  # Block-only check: 1K diary, the block is the only evidence.
+  - world: ladder
+    tag: block-only
+    rungs: [n1, n9, statistical]
+    lengths_tokens: [1000]
+    lags: {1000: [1]}
+    policies: [raw]
+    question_keys: [report, decide, find]
+    seeds: {start: 1000000, count: 2}
+  # Option-order noise: K = 5 replicates in one request.
+  - world: steady
+    tag: option-order
+    contrasts: ["7pt"]
+    lengths_tokens: [16000]
+    policies: [raw]
+    question_keys: [risk, act]
+    replicates: 5
+    seeds: {start: 1000000, count: 4}
+  # Question contamination on the 64K subset; models whose window is below 64K drop out.
+  - &contamination
+    world: ladder
+    tag: contamination-joint
+    rungs: [statistical]
+    lengths_tokens: [64000]
+    lags: {64000: [100]}
+    policies: [raw]
+    question_keys: [report, decide]
+    seeds: {start: 1000000, count: 3}
+  - <<: *contamination
+    tag: contamination-report
+    question_keys: [report]
+  - <<: *contamination
+    tag: contamination-decide
+    question_keys: [decide]
+  # Tokens per day at the longest length every Neon model fits.
+  - world: steady
+    tag: tokens-per-day
+    contrasts: ["7pt"]
+    lengths_tokens: [56000]
+    policies: [raw]
+    question_keys: [risk, act]
+    seeds: {start: 1000000, count: 18}
+    skip_models: [snap]
+  # Ladder days are mostly "Fog." lines, so they get their own tokens-per-day measurement.
+  - world: ladder
+    tag: tokens-per-day-ladder
+    rungs: [statistical]
+    lengths_tokens: [16000]
+    lags: {16000: [100]}
+    policies: [raw]
+    question_keys: [report, decide]
+    seeds: {start: 1000000, count: 1}
+  # Snap: extra pre-flight on the 16K cell, and table reading.
+  - world: steady
+    tag: snap-preflight
+    contrasts: ["7pt"]
+    lengths_tokens: [16000]
+    policies: [raw]
+    question_keys: [risk, act]
+    seeds: {start: 1000100, count: 40}
+    only_models: [snap]
+  - world: steady
+    tag: table-reading
+    contrasts: ["7pt"]
+    lengths_tokens: [16000]
+    policies: [table]
+    question_keys: [risk, act]
+    seeds: {start: 1000100, count: 23}
+    only_models: [snap]
+  # Latency probes: 2 diaries x 64K, 256K x cold, repeat, append x 3.
+  - &probe
+    world: steady
+    tag: latency-cold
+    contrasts: ["2pt"]
+    lengths_tokens: [64000, 256000]
+    policies: [raw]
+    question_keys: [risk, act]
+    repeats: 3
+    seeds: {start: 1000200, count: 2}
+    only_models: [snap]
+  - <<: *probe
+    tag: latency-repeat
+  - <<: *probe
+    tag: latency-append
+    extra_days: 125

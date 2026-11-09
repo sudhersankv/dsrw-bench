@@ -1,0 +1,38 @@
+[project]
+name = "swb"
+version = "0.1.0"
+description = "Does the Sheep Remember the Wolf? Long context vs. harness memory in decision models."
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi>=0.115",
+  "httpx>=0.27",
+  "matplotlib>=3.9",
+  "numpy>=2.0",
+  "polars>=1.9",
+  "psycopg[binary]>=3.2",
+  "pydantic>=2.9",
+  "python-dotenv>=1.0",
+  "pyyaml>=6.0",
+  "typer>=0.12",
+  "uvicorn>=0.30",
+]
+
+[project.scripts]
+swb = "swb.cli:app"
+
+[dependency-groups]
+dev = ["pytest>=8.3", "hypothesis>=4.0", "pytest-asyncio>=0.24", "ruff>=0.6"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/swb"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
