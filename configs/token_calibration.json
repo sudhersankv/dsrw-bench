@@ -1,8 +1,32 @@
 {
+  "jev": {
+    "ladder": {
+      "overhead": 740.682222222222,
+      "tokens_per_day": 8.469408888888884
+    },
+    "reversal": {
+      "overhead": 464.067829457362,
+      "tokens_per_day": 10.853269379844958
+    },
+    "steady": {
+      "overhead": 464.067829457362,
+      "tokens_per_day": 10.853269379844958
+    }
+  },
+  "openjev": {
+    "reversal": {
+      "overhead": 225.3333333333353,
+      "tokens_per_day": 23.780683333333343
+    },
+    "steady": {
+      "overhead": 225.3333333333353,
+      "tokens_per_day": 23.780683333333343
+    }
+  },
   "snap": {
     "ladder": {
-      "overhead": 434.57621440536263,
-      "tokens_per_day": 9.826244556113902
+      "overhead": 435.3937329850451,
+      "tokens_per_day": 9.826140352037385
     },
     "reversal": {
       "overhead": 409.30576802593686,

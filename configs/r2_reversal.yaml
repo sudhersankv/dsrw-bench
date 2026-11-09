@@ -1,27 +1,31 @@
 # Spec "Core sweeps" R2. Nine m values per length come from swb.diary.lengths.reversal_ms.
+# Lengths are token targets; day counts use Snap's measured rate so every model reads identical diaries.
 run_id: r2_reversal
 root_seed: 102
 seeds: {start: 0, count: 30}
-replicates: 1
-concurrency: 4
+replicates: 5
+concurrency: 8
 tokens_per_day: 8
+world_tokens_per_day: {steady: 11.60, reversal: 11.60, ladder: 9.83}
+model_tokens_per_day:
+  jev: {steady: 10.85, reversal: 10.85, ladder: 8.47}
 requires_calibration: true
 model_limits:
+  openjev: {max_tokens: 0}  # failed two stop-and-report pilot checks; see docs/RESULTS.md
   jev: {max_days: 2000}
-  openjev: {max_days: 2000}
 rate_limits:
-  NEON_AI_GATEWAY_TOKEN: 200000
+  NEON_AI_GATEWAY_TOKEN: 600000
 cells:
   - world: reversal
     contrasts: ["7pt", high]
-    lengths_days: [2000, 8000, 32000]
+    lengths_tokens: [16000, 64000, 256000]
     policies: [raw, w1000, e700]
     question_keys: [current, act]
   # H3 is registered at m = 2,000, which the geometric grid does not contain.
   - world: reversal
     tag: h3
     contrasts: ["7pt"]
-    lengths_days: [32000]
+    lengths_tokens: [256000]
     reversal_ms: [2000]
     policies: [raw, w1000]
     question_keys: [current, act]

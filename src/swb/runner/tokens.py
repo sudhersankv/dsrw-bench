@@ -13,6 +13,8 @@ from swb.contracts import Job, ModelEntry, Policy, ResultRow, WorldKind
 from swb.runner.jobs import W1000_DAYS
 
 TOKEN_TOLERANCE = 0.05
+# Pilot overhead was fitted on a few questions; repeated option orders add about 40 tokens each.
+QUESTION_TOKEN_ALLOWANCE = 80
 _LENGTH_POLICIES: tuple[Policy, ...] = ("raw", "w1000", "shuffled")
 # The pilot measures steady and ladder diaries; reversal days read exactly like steady days.
 _REVERSAL_AS: WorldKind = "steady"
@@ -82,7 +84,7 @@ def calibration_problems(
     for entry in models:
         rates = calibration.get(entry.id, {})
         for world in sorted(worlds):
-            planned = config.tokens_per_day_for(world)
+            planned = config.tokens_per_day_for(world, entry.id)
             if world not in rates:
                 problems.append(f"{entry.id}: no pilot measurement for {world} diaries")
             elif abs(rates[world].tokens_per_day - planned) > TOKEN_TOLERANCE * planned:
@@ -99,6 +101,14 @@ def expected_tokens(job: Job, rate: WorldRate) -> float:
     return days * rate.tokens_per_day + rate.overhead
 
 
+def limiter_tokens(job: Job, estimate: int, calibration: Calibration | None) -> int:
+    """Tokens to charge the rate limiter: measured for this model when known, else the estimate."""
+    rate = (calibration or {}).get(job.model, {}).get(job.world.kind)
+    if rate is None or job.policy not in _LENGTH_POLICIES:
+        return estimate
+    return int(expected_tokens(job, rate))
+
+
 def token_problem(
     job: Job, tokens: int, entry: ModelEntry, calibration: Calibration | None
 ) -> str | None:
@@ -109,6 +119,7 @@ def token_problem(
     if rate is None or job.policy not in _LENGTH_POLICIES:
         return None
     expected = expected_tokens(job, rate)
-    if abs(tokens - expected) > TOKEN_TOLERANCE * expected:
+    allowance = QUESTION_TOKEN_ALLOWANCE * len(job.question_keys) * job.replicates
+    if abs(tokens - expected) > TOKEN_TOLERANCE * expected + allowance:
         return f"reported {tokens:,} input tokens, expected about {expected:,.0f}"
     return None

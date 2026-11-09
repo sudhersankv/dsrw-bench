@@ -59,14 +59,18 @@ class RunConfig(BaseModel):
     tokens_per_day: float = 8.0
     # Measured per world by `swb calibrate`; ladder days are mostly short "Fog." lines.
     world_tokens_per_day: dict[WorldKind, float] = Field(default_factory=dict)
+    # Per model where its tokenizer differs. Day counts always come from world_tokens_per_day,
+    # so every model reads byte-identical diaries; these only decide what fits and what it costs.
+    model_tokens_per_day: dict[str, dict[WorldKind, float]] = Field(default_factory=dict)
     requires_calibration: bool = False  # refuse paid calls until the token check has passed
     cells: list[Cell]
     model_limits: dict[str, ModelLimit] = Field(default_factory=dict)
     # Input tokens per minute per account, keyed by the account's api_key_env.
     rate_limits: dict[str, int] = Field(default_factory=dict)
 
-    def tokens_per_day_for(self, world: WorldKind) -> float:
-        return self.world_tokens_per_day.get(world, self.tokens_per_day)
+    def tokens_per_day_for(self, world: WorldKind, model: str | None = None) -> float:
+        rate = self.model_tokens_per_day.get(model or "", {}).get(world)
+        return rate if rate is not None else self.world_tokens_per_day.get(world, self.tokens_per_day)
 
 
 def load_run_config(path: str | Path) -> RunConfig:

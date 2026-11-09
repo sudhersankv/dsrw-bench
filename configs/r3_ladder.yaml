@@ -1,19 +1,25 @@
 # Spec "Core sweeps" R3. Both pair sides run for every seed. The shuffled arm uses one lag per rung
 # and length (lag 100, the first lag H2 reads); shuffling removes position, so the lag only places the block.
+# Report and decide go in separate requests: H2 compares them, and the pilot could not rule out priming.
 run_id: r3_ladder
 root_seed: 103
 seeds: {start: 0, count: 20}
-replicates: 1
-concurrency: 4
+replicates: 5
+concurrency: 8
 tokens_per_day: 8
+world_tokens_per_day: {steady: 11.60, reversal: 11.60, ladder: 9.83}
+model_tokens_per_day:
+  jev: {steady: 10.85, reversal: 10.85, ladder: 8.47}
 requires_calibration: true
 model_limits:
+  openjev: {max_tokens: 0}  # failed two stop-and-report pilot checks; see docs/RESULTS.md
   jev: {max_tokens: 16000}
-  openjev: {max_tokens: 16000}
 rate_limits:
-  NEON_AI_GATEWAY_TOKEN: 200000
+  NEON_AI_GATEWAY_TOKEN: 600000
 cells:
-  - world: ladder
+  - &ladder
+    world: ladder
+    tag: report
     rungs: [n1, n9, statistical]
     lengths_tokens: [16000, 128000]
     lags:
@@ -21,4 +27,7 @@ cells:
       128000: [1, 3, 10, 100, 300, 1000, 1900, 5000, 15000]
     shuffled_lag: 100
     policies: [raw]
-    question_keys: [report, decide, find]
+    question_keys: [report, find]
+  - <<: *ladder
+    tag: decide
+    question_keys: [decide]

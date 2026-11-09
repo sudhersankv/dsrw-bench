@@ -1,0 +1,22 @@
+# Pilot for Jev and OpenJev. Same checks as pilot.yaml, sized to fit their real token rates:
+# one test call showed about 11 and 21 tokens per day, so the 56K and 64K cells of pilot.yaml overflow.
+run_id: pilot
+root_seed: 100
+seeds: {start: 1000000, count: 5}
+replicates: 1
+concurrency: 4
+tokens_per_day: 8
+rate_limits:
+  NEON_AI_GATEWAY_TOKEN: 200000
+cells:
+  - {world: steady, tag: nondeterminism, contrasts: ["7pt"], lengths_tokens: [16000], policies: [raw], question_keys: [risk, act], repeats: 2}
+  - {world: steady, tag: prior-bias, contrasts: ["7pt"], lengths_days: [0], policies: [raw], question_keys: [risk, act], seeds: {start: 1000000, count: 12}}
+  - {world: steady, tag: oracle, contrasts: ["7pt"], lengths_tokens: [16000], policies: [oracle], question_keys: [risk, act]}
+  - {world: steady, tag: reading-control, contrasts: [high], lengths_days: [2000], policies: [raw], question_keys: [risk, act], seeds: {start: 1000000, count: 10}}
+  - {world: ladder, tag: block-only, rungs: [n1, n9, statistical], lengths_tokens: [1000], lags: {1000: [1]}, policies: [raw], question_keys: [report, decide, find], seeds: {start: 1000000, count: 20}}
+  - {world: steady, tag: option-order, contrasts: ["7pt"], lengths_tokens: [16000], policies: [raw], question_keys: [risk, act], replicates: 5, seeds: {start: 1000000, count: 4}}
+  - {world: ladder, tag: contamination-joint, rungs: [statistical], lengths_tokens: [32000], lags: {32000: [100]}, policies: [raw], question_keys: [report, decide], seeds: {start: 1000000, count: 3}}
+  - {world: ladder, tag: contamination-report, rungs: [statistical], lengths_tokens: [32000], lags: {32000: [100]}, policies: [raw], question_keys: [report], seeds: {start: 1000000, count: 3}}
+  - {world: ladder, tag: contamination-decide, rungs: [statistical], lengths_tokens: [32000], lags: {32000: [100]}, policies: [raw], question_keys: [decide], seeds: {start: 1000000, count: 3}}
+  - {world: steady, tag: tokens-per-day, contrasts: ["7pt"], lengths_tokens: [24000], policies: [raw], question_keys: [risk, act], seeds: {start: 1000000, count: 8}}
+  - {world: ladder, tag: tokens-per-day-ladder, rungs: [statistical], lengths_tokens: [16000], lags: {16000: [100]}, policies: [raw], question_keys: [report, decide], seeds: {start: 1000000, count: 1}}

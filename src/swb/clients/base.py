@@ -68,8 +68,6 @@ def _raise_for_terminal(response: httpx.Response, model: str) -> None:
         raise StopRun(f"{model}: HTTP 402, credits exhausted")
     if status in (401, 403):
         raise StopRun(f"{model}: HTTP {status}, credentials refused")
-    if status == 429 and DAILY_LIMIT_CODE in response.text:
-        raise StopModel(f"{model}: daily spend cap reached ({DAILY_LIMIT_CODE})")
     if status != 200 and not _is_retryable(status):
         raise CallFailed(f"{model}: HTTP {status}")
 
@@ -97,6 +95,7 @@ class HttpEndpoint:
         attempts = self.backoff.config.max_attempts
         billed_attempts = 0
         last_error = "no attempts made"
+        limited = False
         for attempt in range(attempts):
             started = time.perf_counter()
             try:
@@ -109,6 +108,7 @@ class HttpEndpoint:
             _raise_for_terminal(response, self.model)
             if response.status_code != 200:
                 last_error = f"HTTP {response.status_code}"
+                limited = response.status_code == 429 and DAILY_LIMIT_CODE in response.text
                 await self._wait(attempt, attempts, _retry_after(response))
                 continue
             billed_attempts += 1
@@ -121,6 +121,10 @@ class HttpEndpoint:
             except (MalformedResponse, ValueError) as exc:
                 last_error = f"malformed response: {exc}"
                 await self._wait(attempt, attempts, None)
+        if limited:
+            # The gateway uses this code for short bursts too, so only a limit that outlasts every
+            # retry is treated as the daily spend cap.
+            raise StopModel(f"{self.model}: limit outlasted retries ({DAILY_LIMIT_CODE})")
         raise CallFailed(f"{self.model}: {last_error}", billed_attempts=billed_attempts)
 
     async def _wait(self, attempt: int, attempts: int, retry_after: float | None) -> None:

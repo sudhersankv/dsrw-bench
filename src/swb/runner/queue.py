@@ -33,7 +33,7 @@ from swb.harness.policies import apply
 from swb.questions.build import build
 from swb.questions.truth import empirical, truth
 from swb.runner.budget import BudgetGuard, usd_for
-from swb.runner.tokens import Calibration, token_problem
+from swb.runner.tokens import Calibration, limiter_tokens, token_problem
 from swb.store.base import ResultStore
 
 log = logging.getLogger(__name__)
@@ -235,7 +235,7 @@ class _Runner:
             return
         limiter = self.limiters.get(entry.api_key_env or "")
         if limiter is not None:
-            await limiter.acquire(view.est_tokens)
+            await limiter.acquire(limiter_tokens(job, view.est_tokens, self.calibration))
         await self._call_and_store(job, entry, prepared, view)
 
     def _refuse(self, job: Job) -> None:

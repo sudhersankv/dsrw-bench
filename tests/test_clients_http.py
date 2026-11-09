@@ -143,7 +143,7 @@ async def test_daily_cap_stops_the_model(serve: Any) -> None:
     server = serve([], default=(429, {"code": "REQUEST_LIMIT_EXCEEDED"}))
     with pytest.raises(StopModel):
         await _client(server).decide("diary", QUESTIONS)
-    assert len(server.requests) == 1
+    assert len(server.requests) == FAST.max_attempts
 
 
 async def test_persistent_503_fails_the_job_as_unbilled(serve: Any) -> None:

@@ -55,7 +55,7 @@ def _fits(
     n_days: int,
     target_tokens: int,
 ) -> bool:
-    diary_tokens = estimated_tokens(policy, n_days, config.tokens_per_day_for(world))
+    diary_tokens = estimated_tokens(policy, n_days, config.tokens_per_day_for(world, entry.id))
     if diary_tokens + PROMPT_OVERHEAD_TOKENS > entry.usable_window:
         return False
     return _within_limit(config.model_limits.get(entry.id), target_tokens, n_days)
@@ -212,7 +212,7 @@ def estimate(config: RunConfig, jobs: list[Job], models: list[ModelEntry]) -> li
     for job in jobs:
         row = estimates.setdefault(job.model, ModelEstimate(run_id=job.run_id, model=job.model))
         tokens = estimated_tokens(
-            job.policy, job.world.n_days, config.tokens_per_day_for(job.world.kind)
+            job.policy, job.world.n_days, config.tokens_per_day_for(job.world.kind, job.model)
         )
         row.calls += 1
         row.tokens += tokens

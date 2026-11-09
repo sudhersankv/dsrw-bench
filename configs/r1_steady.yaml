@@ -1,16 +1,20 @@
 # Spec "Core sweeps" R1. W1000 is dropped automatically where the diary is 1,000 days or shorter.
+# Day counts use Snap's measured rate, so every model reads byte-identical diaries.
 run_id: r1_steady
 root_seed: 101
 seeds: {start: 0, count: 30}
-replicates: 1
-concurrency: 4
+replicates: 5
+concurrency: 8
 tokens_per_day: 8
+world_tokens_per_day: {steady: 11.60, reversal: 11.60, ladder: 9.83}
+model_tokens_per_day:
+  jev: {steady: 10.85, reversal: 10.85, ladder: 8.47}
 requires_calibration: true
 model_limits:
+  openjev: {max_tokens: 0}  # failed two stop-and-report pilot checks; see docs/RESULTS.md
   jev: {max_tokens: 56000}
-  openjev: {max_tokens: 112000}
 rate_limits:
-  NEON_AI_GATEWAY_TOKEN: 200000
+  NEON_AI_GATEWAY_TOKEN: 600000
 cells:
   - world: steady
     contrasts: ["7pt"]

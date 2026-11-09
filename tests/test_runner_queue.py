@@ -152,13 +152,21 @@ async def test_402_stops_the_run_immediately(server: Any, tmp_path: Path) -> Non
 
 
 async def test_daily_cap_stops_only_that_model(server: Any, tmp_path: Path) -> None:
-    fake = server({0: (429, '{"code": "REQUEST_LIMIT_EXCEEDED"}')})
+    fake = server({i: (429, '{"code": "REQUEST_LIMIT_EXCEEDED"}') for i in range(200)})
     entry = _entry(fake.url)
     jobs = expand_config(_config(count=4), [entry])
     summary = await _run(jobs, entry, JsonlStore(tmp_path / "r.jsonl"), concurrency=1)
     assert "fake" in summary.stopped_models
     assert summary.stopped_run is None
-    assert fake.count == 1
+
+
+async def test_short_limit_burst_is_retried(server: Any, tmp_path: Path) -> None:
+    fake = server({0: (429, '{"code": "REQUEST_LIMIT_EXCEEDED"}')})
+    entry = _entry(fake.url)
+    jobs = expand_config(_config(count=4), [entry])
+    summary = await _run(jobs, entry, JsonlStore(tmp_path / "r.jsonl"), concurrency=1)
+    assert summary.stopped_models == {}
+    assert summary.clean
 
 
 async def test_resume_skips_finished_jobs(server: Any, tmp_path: Path) -> None:
