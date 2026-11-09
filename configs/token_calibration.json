@@ -1,0 +1,16 @@
+{
+  "snap": {
+    "ladder": {
+      "overhead": 434.57621440536263,
+      "tokens_per_day": 9.826244556113902
+    },
+    "reversal": {
+      "overhead": 409.30576802593686,
+      "tokens_per_day": 11.600173930525129
+    },
+    "steady": {
+      "overhead": 409.30576802593686,
+      "tokens_per_day": 11.600173930525129
+    }
+  }
+}
