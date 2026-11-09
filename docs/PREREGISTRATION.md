@@ -2,7 +2,7 @@
 
 Does the Sheep Remember the Wolf? Long context vs. harness memory in decision models.
 
-Status: **not yet registered.** This file is drawn from `docs/SPEC.md` (v2). It must be frozen and registered before any Snap call, including the pilot.
+Status: **frozen locally on 2026-11-09 (tag `freeze-2026-11-09`, hashes in `docs/FREEZE.txt`), not yet publicly registered.** This file is drawn from `docs/SPEC.md` (v2). The spec calls for public registration before any Snap call. The Snap pilot ran before it, as recorded under Amendments. Public registration must happen before the main runs.
 
 | Field | Value |
 | --- | --- |
@@ -84,3 +84,5 @@ Each amendment is dated before the run it affects.
 | 2026-11-08 | Every hypothesis requires its full registered seed count. | A verdict from a partial run would not be the registered test. |
 | 2026-11-08 | m = 2,000 added to R2 at L = 32,000 (7-point), raw and W1000. | H3 is registered at a swap age the geometric grid does not contain. Adds 60 Snap calls, about $0.31. |
 | 2026-11-08 | Ladder tokens per day measured separately in the pilot and enforced per world. | Ladder days are mostly short "Fog." lines, so one rate overstated their real context size. |
+| 2026-11-09 | Deviation: the Snap pilot ran after a local freeze but before OSF registration, on the project owner's instruction. | Pilot seeds are reserved and never analysed, and it may change only branch-table items. Main runs had not started. |
+| 2026-11-09 | Deviation: the pilot's reading control used High (45/25/25/5) rather than 90/50/50/10. | The code has no 90/50/50/10 contrast. This makes the reading control a weaker check. |
