@@ -1,0 +1,205 @@
+{
+  "is_demo": false,
+  "metrics": [
+    {
+      "world": "ladder",
+      "policy": "raw",
+      "question": "decide",
+      "p_correct": 0.8016333333333334,
+      "log_loss": null,
+      "avoidance": null,
+      "top1": 0.9533333333333334,
+      "seeds": 20
+    },
+    {
+      "world": "ladder",
+      "policy": "raw",
+      "question": "find",
+      "p_correct": 0.9996595238095238,
+      "log_loss": null,
+      "avoidance": null,
+      "top1": 1.0,
+      "seeds": 20
+    },
+    {
+      "world": "ladder",
+      "policy": "raw",
+      "question": "report",
+      "p_correct": 0.9667619047619048,
+      "log_loss": null,
+      "avoidance": null,
+      "top1": 0.9871428571428572,
+      "seeds": 20
+    },
+    {
+      "world": "ladder",
+      "policy": "shuffled",
+      "question": "decide",
+      "p_correct": 0.7243499999999999,
+      "log_loss": null,
+      "avoidance": null,
+      "top1": 0.9683333333333334,
+      "seeds": 20
+    },
+    {
+      "world": "ladder",
+      "policy": "shuffled",
+      "question": "find",
+      "p_correct": 0.9999833333333333,
+      "log_loss": null,
+      "avoidance": null,
+      "top1": 1.0,
+      "seeds": 20
+    },
+    {
+      "world": "ladder",
+      "policy": "shuffled",
+      "question": "report",
+      "p_correct": 0.9517833333333332,
+      "log_loss": null,
+      "avoidance": null,
+      "top1": 0.9833333333333334,
+      "seeds": 20
+    },
+    {
+      "world": "reversal",
+      "policy": "e700",
+      "question": "act",
+      "p_correct": null,
+      "log_loss": null,
+      "avoidance": -0.49512222222222213,
+      "top1": null,
+      "seeds": 30
+    },
+    {
+      "world": "reversal",
+      "policy": "e700",
+      "question": "current",
+      "p_correct": 0.15904814814814816,
+      "log_loss": null,
+      "avoidance": null,
+      "top1": 0.16000000000000003,
+      "seeds": 30
+    },
+    {
+      "world": "reversal",
+      "policy": "raw",
+      "question": "act",
+      "p_correct": null,
+      "log_loss": null,
+      "avoidance": -0.2874814814814815,
+      "top1": null,
+      "seeds": 30
+    },
+    {
+      "world": "reversal",
+      "policy": "raw",
+      "question": "current",
+      "p_correct": 0.16365555555555555,
+      "log_loss": null,
+      "avoidance": null,
+      "top1": 0.1285185185185185,
+      "seeds": 30
+    },
+    {
+      "world": "reversal",
+      "policy": "w1000",
+      "question": "act",
+      "p_correct": null,
+      "log_loss": null,
+      "avoidance": -0.21178148148148146,
+      "top1": null,
+      "seeds": 30
+    },
+    {
+      "world": "reversal",
+      "policy": "w1000",
+      "question": "current",
+      "p_correct": 0.20629629629629628,
+      "log_loss": null,
+      "avoidance": null,
+      "top1": 0.20222222222222222,
+      "seeds": 30
+    },
+    {
+      "world": "steady",
+      "policy": "oracle",
+      "question": "act",
+      "p_correct": null,
+      "log_loss": null,
+      "avoidance": -0.10338666666666664,
+      "top1": null,
+      "seeds": 30
+    },
+    {
+      "world": "steady",
+      "policy": "oracle",
+      "question": "risk",
+      "p_correct": 1.0,
+      "log_loss": null,
+      "avoidance": null,
+      "top1": 1.0,
+      "seeds": 30
+    },
+    {
+      "world": "steady",
+      "policy": "raw",
+      "question": "act",
+      "p_correct": null,
+      "log_loss": null,
+      "avoidance": 0.13955555555555552,
+      "top1": null,
+      "seeds": 30
+    },
+    {
+      "world": "steady",
+      "policy": "raw",
+      "question": "risk",
+      "p_correct": 0.37617777777777783,
+      "log_loss": null,
+      "avoidance": null,
+      "top1": 0.43777777777777777,
+      "seeds": 30
+    },
+    {
+      "world": "steady",
+      "policy": "table",
+      "question": "act",
+      "p_correct": null,
+      "log_loss": null,
+      "avoidance": 0.6228533333333334,
+      "top1": null,
+      "seeds": 30
+    },
+    {
+      "world": "steady",
+      "policy": "table",
+      "question": "risk",
+      "p_correct": 0.5787999999999999,
+      "log_loss": null,
+      "avoidance": null,
+      "top1": 0.58,
+      "seeds": 30
+    },
+    {
+      "world": "steady",
+      "policy": "w1000",
+      "question": "act",
+      "p_correct": null,
+      "log_loss": null,
+      "avoidance": 0.11771111111111107,
+      "top1": null,
+      "seeds": 30
+    },
+    {
+      "world": "steady",
+      "policy": "w1000",
+      "question": "risk",
+      "p_correct": 0.3290444444444445,
+      "log_loss": null,
+      "avoidance": null,
+      "top1": 0.3622222222222222,
+      "seeds": 30
+    }
+  ]
+}

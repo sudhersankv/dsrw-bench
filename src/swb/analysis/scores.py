@@ -268,6 +268,12 @@ def _ladder_score(
         hi=_to_score(estimate.hi),
         how=how,
         cells_used=len(lags),
+        note=(
+            "Capped at 100: old clues moved the answer at least as much as fresh ones. "
+            "This means no fading with distance, not a strong effect."
+            if estimate.value >= 1
+            else None
+        ),
     )
 
 

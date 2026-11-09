@@ -21,6 +21,7 @@ models:
     model_id: typesafeai-jev-1-14-0
     # Listed as 65,536, but the gateway rejected requests above about 33,000 tokens on 2026-11-09.
     window: 33000
+    top1_only: true
     price_input_per_m: 0.042
   - id: openjev
     display: OpenJev (Qwen 3.5 4B)

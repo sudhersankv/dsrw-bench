@@ -1,0 +1,100 @@
+{
+  "is_demo": false,
+  "resamples": 10000,
+  "price_per_million_input_tokens": 0.04,
+  "scores_on_matched_diaries": {
+    "ladder": [
+      {
+        "policy": "raw",
+        "label": "Whole diary",
+        "score": 0.7839378096023575,
+        "tokens_per_decision": 70762
+      },
+      {
+        "policy": "shuffled",
+        "label": "Shuffled diary (control)",
+        "score": 0.8196978260080021,
+        "tokens_per_decision": 70762
+      }
+    ],
+    "reversal": [
+      {
+        "policy": "raw",
+        "label": "Whole diary",
+        "score": 0.2459879079203547,
+        "tokens_per_decision": 113014
+      },
+      {
+        "policy": "w1000",
+        "label": "Last 1,000 days",
+        "score": 0.278112468406742,
+        "tokens_per_decision": 12188
+      },
+      {
+        "policy": "e700",
+        "label": "Recency-weighted tally",
+        "score": 0.2517942325553107,
+        "tokens_per_decision": 677
+      }
+    ],
+    "steady": [
+      {
+        "policy": "raw",
+        "label": "Whole diary",
+        "score": 0.28565418152014416,
+        "tokens_per_decision": 99868
+      },
+      {
+        "policy": "w1000",
+        "label": "Last 1,000 days",
+        "score": 0.2757618970870972,
+        "tokens_per_decision": 12158
+      },
+      {
+        "policy": "table",
+        "label": "All-time tally",
+        "score": 0.5373751889796308,
+        "tokens_per_decision": 662
+      },
+      {
+        "policy": "oracle",
+        "label": "Told the answer",
+        "score": 0.6332825277249018,
+        "tokens_per_decision": 497
+      }
+    ]
+  },
+  "costs": [
+    {
+      "policy": "raw",
+      "label": "Whole diary",
+      "usd_per_life": 163.84
+    },
+    {
+      "policy": "w1000",
+      "label": "Last 1,000 days",
+      "usd_per_life": 10.24
+    },
+    {
+      "policy": "e700",
+      "label": "Recency-weighted tally",
+      "usd_per_life": 0.128
+    },
+    {
+      "policy": "table",
+      "label": "All-time tally",
+      "usd_per_life": 0.128
+    },
+    {
+      "policy": "oracle",
+      "label": "Told the answer",
+      "usd_per_life": 0.0256
+    },
+    {
+      "policy": "shuffled",
+      "label": "Shuffled diary (control)",
+      "usd_per_life": 163.84
+    }
+  ],
+  "code_alone_usd_per_life": 0.0
+}

@@ -106,6 +106,8 @@ class ModelEntry(BaseModel):
     path: str | None = None
     api_key_env: str | None = None
     budget_capped: bool = False
+    # Pilot found its probabilities one-hot or too coarse for log-odds. Scored as top-1 only.
+    top1_only: bool = False
 
     @property
     def usable_window(self) -> int:

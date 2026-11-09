@@ -1,0 +1,205 @@
+{
+  "is_demo": false,
+  "metrics": [
+    {
+      "world": "ladder",
+      "policy": "raw",
+      "question": "decide",
+      "p_correct": 0.5174597005763887,
+      "log_loss": 0.8260784769408197,
+      "avoidance": null,
+      "top1": 0.6757291666666666,
+      "seeds": 20
+    },
+    {
+      "world": "ladder",
+      "policy": "raw",
+      "question": "find",
+      "p_correct": 0.9557289956451858,
+      "log_loss": 0.05999511916303625,
+      "avoidance": null,
+      "top1": 0.9852083333333332,
+      "seeds": 20
+    },
+    {
+      "world": "ladder",
+      "policy": "raw",
+      "question": "report",
+      "p_correct": 0.8125039289241733,
+      "log_loss": 0.25999652648892424,
+      "avoidance": null,
+      "top1": 0.936875,
+      "seeds": 20
+    },
+    {
+      "world": "ladder",
+      "policy": "shuffled",
+      "question": "decide",
+      "p_correct": 0.5184690812726815,
+      "log_loss": 0.810479814922707,
+      "avoidance": null,
+      "top1": 0.7108333333333333,
+      "seeds": 20
+    },
+    {
+      "world": "ladder",
+      "policy": "shuffled",
+      "question": "find",
+      "p_correct": 0.9372829384294649,
+      "log_loss": 0.08273124909941235,
+      "avoidance": null,
+      "top1": 0.9800000000000001,
+      "seeds": 20
+    },
+    {
+      "world": "ladder",
+      "policy": "shuffled",
+      "question": "report",
+      "p_correct": 0.8196978260080021,
+      "log_loss": 0.25024753054845406,
+      "avoidance": null,
+      "top1": 0.9308333333333332,
+      "seeds": 20
+    },
+    {
+      "world": "reversal",
+      "policy": "e700",
+      "question": "act",
+      "p_correct": null,
+      "log_loss": null,
+      "avoidance": -0.3261781655867236,
+      "top1": null,
+      "seeds": 30
+    },
+    {
+      "world": "reversal",
+      "policy": "e700",
+      "question": "current",
+      "p_correct": 0.2517942325553107,
+      "log_loss": 5.2020602886668295,
+      "avoidance": null,
+      "top1": 0.25234567901234567,
+      "seeds": 30
+    },
+    {
+      "world": "reversal",
+      "policy": "raw",
+      "question": "act",
+      "p_correct": null,
+      "log_loss": null,
+      "avoidance": -0.041864257142850844,
+      "top1": null,
+      "seeds": 30
+    },
+    {
+      "world": "reversal",
+      "policy": "raw",
+      "question": "current",
+      "p_correct": 0.24627850724530945,
+      "log_loss": 1.5069278255893688,
+      "avoidance": null,
+      "top1": 0.20715151515151517,
+      "seeds": 30
+    },
+    {
+      "world": "reversal",
+      "policy": "w1000",
+      "question": "act",
+      "p_correct": null,
+      "log_loss": null,
+      "avoidance": 0.02344659182835709,
+      "top1": null,
+      "seeds": 30
+    },
+    {
+      "world": "reversal",
+      "policy": "w1000",
+      "question": "current",
+      "p_correct": 0.278251360117486,
+      "log_loss": 1.4066213184029581,
+      "avoidance": null,
+      "top1": 0.3086060606060606,
+      "seeds": 30
+    },
+    {
+      "world": "steady",
+      "policy": "oracle",
+      "question": "act",
+      "p_correct": null,
+      "log_loss": null,
+      "avoidance": 0.13755955348412194,
+      "top1": null,
+      "seeds": 30
+    },
+    {
+      "world": "steady",
+      "policy": "oracle",
+      "question": "risk",
+      "p_correct": 0.6332825277249018,
+      "log_loss": 0.4705809340281456,
+      "avoidance": null,
+      "top1": 0.9933333333333334,
+      "seeds": 30
+    },
+    {
+      "world": "steady",
+      "policy": "raw",
+      "question": "act",
+      "p_correct": null,
+      "log_loss": null,
+      "avoidance": 0.03469047759261836,
+      "top1": null,
+      "seeds": 30
+    },
+    {
+      "world": "steady",
+      "policy": "raw",
+      "question": "risk",
+      "p_correct": 0.29600781036452173,
+      "log_loss": 1.3209487645057927,
+      "avoidance": null,
+      "top1": 0.43238095238095237,
+      "seeds": 30
+    },
+    {
+      "world": "steady",
+      "policy": "table",
+      "question": "act",
+      "p_correct": null,
+      "log_loss": null,
+      "avoidance": 0.5126190768107475,
+      "top1": null,
+      "seeds": 30
+    },
+    {
+      "world": "steady",
+      "policy": "table",
+      "question": "risk",
+      "p_correct": 0.5001769539622044,
+      "log_loss": 1.2228711713548883,
+      "avoidance": null,
+      "top1": 0.5857142857142857,
+      "seeds": 30
+    },
+    {
+      "world": "steady",
+      "policy": "w1000",
+      "question": "act",
+      "p_correct": null,
+      "log_loss": null,
+      "avoidance": 0.035329425642887755,
+      "top1": null,
+      "seeds": 30
+    },
+    {
+      "world": "steady",
+      "policy": "w1000",
+      "question": "risk",
+      "p_correct": 0.2757618970870972,
+      "log_loss": 1.3757043388952739,
+      "avoidance": null,
+      "top1": 0.344,
+      "seeds": 30
+    }
+  ]
+}

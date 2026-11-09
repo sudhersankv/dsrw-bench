@@ -1,4 +1,4 @@
-export type Page = "home" | "how" | "model";
+export type Page = "home" | "how" | "model" | "report";
 
 export function siteHeader(page: Page, tagline: string): string {
   const current = (target: Page): string => (page === target ? ' aria-current="page"' : "");
@@ -7,6 +7,7 @@ export function siteHeader(page: Page, tagline: string): string {
       <nav class="site-nav" aria-label="Site">
         <a href="#/"${current("home")}>The field</a>
         <a href="#/#leaderboard">Leaderboard</a>
+        <a href="#/report"${current("report")}>First run</a>
         <a href="#/how"${current("how")}>How it works</a>
       </nav>
       <p>${tagline}</p>

@@ -1,0 +1,36 @@
+{
+  "is_demo": false,
+  "resamples": 10000,
+  "worlds": {
+    "ladder": {
+      "shuffled": {
+        "rescue": -0.0115,
+        "value_added": null
+      }
+    },
+    "reversal": {
+      "w1000": {
+        "rescue": 0.04264074074074073,
+        "value_added": 0.051406972417153196
+      },
+      "e700": {
+        "rescue": -0.004607407407407418,
+        "value_added": 0.010530720523746762
+      }
+    },
+    "steady": {
+      "w1000": {
+        "rescue": -0.015466666666666677,
+        "value_added": -0.18372692638846097
+      },
+      "table": {
+        "rescue": 0.15515555555555557,
+        "value_added": 0.05870953634895772
+      },
+      "oracle": {
+        "rescue": 0.6238222222222222,
+        "value_added": 0.0
+      }
+    }
+  }
+}

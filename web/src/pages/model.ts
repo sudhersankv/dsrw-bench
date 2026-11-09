@@ -88,7 +88,7 @@ function harnessSection(card: ModelCard): string {
 function pageHtml(card: ModelCard): string {
   const scores = Object.fromEntries(card.subscores.map((s) => [s.id, s.score]));
   const flockClass = card.flock_score === null ? "flock-number is-untestable" : "flock-number";
-  const topOnly = card.probabilities_source === "verbalized" ? `<p class="section-lede"><strong>Top-1 only.</strong> This model gives one answer instead of probabilities, so some scores cannot be measured.</p>` : "";
+  const topOnly = card.probabilities_source === "verbalized" ? `<p class="section-lede"><strong>Top-1 only.</strong> This model gives one answer or probabilities too coarse to score finely, so some scores cannot be measured.</p>` : "";
   return `
     ${siteHeader("model", "One model's full results, and the card you can post.")}
     ${card.is_demo ? demoStamp() : ""}

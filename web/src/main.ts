@@ -2,6 +2,7 @@ import "./styles.css";
 import { renderHome, type PageView } from "./pages/home";
 import { renderHow } from "./pages/how";
 import { renderModel } from "./pages/model";
+import { renderReport } from "./pages/report";
 import { loadCanvasFonts } from "./theme";
 
 const app = document.querySelector<HTMLElement>("#app")!;
@@ -30,6 +31,8 @@ function route(): void {
   onHome = false;
   if (target === "how") {
     current = renderHow(app);
+  } else if (target === "report") {
+    current = renderReport(app);
   } else if (target.startsWith("model/")) {
     current = renderModel(app, decodeURIComponent(target.slice("model/".length)));
   } else {

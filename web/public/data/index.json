@@ -1,0 +1,38 @@
+{
+  "is_demo": false,
+  "generated_at": "2026-11-09T10:55:43.461679+00:00",
+  "spec_version": "v2",
+  "models": [
+    {
+      "model_id": "jev",
+      "display": "Jev 1.14",
+      "flock_score": null,
+      "subscores": {
+        "history": 43.54708086078744,
+        "adapt": 0.0,
+        "recall": null,
+        "use": null
+      },
+      "max_tokens_tested": 56000
+    },
+    {
+      "model_id": "snap",
+      "display": "Snap 1.1",
+      "flock_score": 45.358977473517704,
+      "subscores": {
+        "history": 23.83023400365461,
+        "adapt": 12.246698416898493,
+        "recall": 86.20278052959235,
+        "use": 100.0
+      },
+      "max_tokens_tested": 256000
+    }
+  ],
+  "shared_length_tokens": 16000,
+  "disclaimers": [
+    "Scores are descriptive and support no hypothesis; the confirmatory tests H1 to H3 are reported separately.",
+    "The leaderboard ranks models on shared lengths up to 16K tokens; each card scores every length that model fits, so card and leaderboard scores can differ.",
+    "Cost per life is computed for a 32,000-day life queried daily at 8 tokens per diary day."
+  ],
+  "registration_url": null
+}

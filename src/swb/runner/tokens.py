@@ -13,6 +13,9 @@ from swb.contracts import Job, ModelEntry, Policy, ResultRow, WorldKind
 from swb.runner.jobs import W1000_DAYS
 
 TOKEN_TOLERANCE = 0.05
+# Random pasture names tokenize differently, so a diary can run about 6% short of its average.
+# A truncated diary would be far shorter than this.
+TRUNCATION_TOLERANCE = 0.10
 # Pilot overhead was fitted on a few questions. Each extra question costs 40 tokens on Snap and
 # about 260 on Jev, so a request may run this far over. Truncation shows up as too few tokens,
 # which gets no allowance.
@@ -122,6 +125,6 @@ def token_problem(
         return None
     expected = expected_tokens(job, rate)
     allowance = QUESTION_TOKEN_ALLOWANCE * len(job.question_keys) * job.replicates
-    if not expected * (1 - TOKEN_TOLERANCE) <= tokens <= expected * (1 + TOKEN_TOLERANCE) + allowance:
+    if not expected * (1 - TRUNCATION_TOLERANCE) <= tokens <= expected * (1 + TOKEN_TOLERANCE) + allowance:
         return f"reported {tokens:,} input tokens, expected about {expected:,.0f}"
     return None

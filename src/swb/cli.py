@@ -248,8 +248,14 @@ def _build_site(store: ResultStore, out: Path, models_file: Path = DEFAULT_MODEL
     from swb.analysis.cards import build_site
     from swb.runner.demo import demo_models
 
-    rows = store.rows()
     registry = load_models(models_file) if models_file.exists() else []
+    top1_only = {entry.id for entry in registry if entry.top1_only}
+    rows = [
+        row.model_copy(update={"probabilities_source": "verbalized"})
+        if row.model in top1_only
+        else row
+        for row in store.rows()
+    ]
     build_site(
         rows,
         out,

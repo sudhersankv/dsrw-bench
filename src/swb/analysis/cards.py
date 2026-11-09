@@ -96,7 +96,10 @@ def verdict_line(scores: list[SubScore], flock: float | None, verbalized: bool) 
         if flock is None
         else f"Overall {flock:.0f}/100; "
     )
-    suffix = " Top-1 only: this model gives one answer, not probabilities." if verbalized else ""
+    suffix = " Top-1 only: this model's probabilities cannot be scored finely." if verbalized else ""
+    use = by_id["use"]
+    if use.score is not None and use.score >= 100:
+        suffix += " Old-clue score capped: no fading with distance, but the effect is small."
     return summary + "; ".join(parts) + "." + suffix
 
 

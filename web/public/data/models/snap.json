@@ -1,0 +1,1023 @@
+{
+  "model_id": "snap",
+  "display": "Snap 1.1",
+  "is_demo": false,
+  "flock_score": 38.43016586184047,
+  "subscores": [
+    {
+      "id": "history",
+      "label": "Uses history",
+      "score": 12.507234881658015,
+      "lo": 7.582214526171047,
+      "hi": 17.623561717777527,
+      "how": "Compared the whole diary with simple counting on 5 diary lengths and 30 sheep lives: the model sat 0.045 above guessing, the counter 0.361 above guessing, and the score is the first divided by the second.",
+      "cells_used": 5,
+      "note": "2 of 7 diary lengths skipped because even the reference could not beat chance by 0.20."
+    },
+    {
+      "id": "adapt",
+      "label": "Adapts",
+      "score": 2.7832627038634072,
+      "lo": 0.07561552864813748,
+      "hi": 5.439493780270366,
+      "how": "After the wolf moved, compared the model with a change-point filter over 24 conditions and 30 sheep lives: the model sat 0.016 above guessing on the new danger field, the filter 0.589 above guessing, and the score is the first divided by the second.",
+      "cells_used": 24,
+      "note": "31 of 55 conditions skipped because even the reference could not beat chance by 0.20."
+    },
+    {
+      "id": "recall",
+      "label": "Recalls",
+      "score": 100.0,
+      "lo": 100.0,
+      "hi": 100.0,
+      "how": "How strongly a clue 100 or more days old moved the answer when asked to report where wolves were seen, as a share of a clue 1 to 10 days old: 2.16 versus 1.78 on the same scale, over 6 ages at 128K tokens and 20 sheep lives.",
+      "cells_used": 6,
+      "note": "Capped at 100: old clues moved the answer at least as much as fresh ones. This means no fading with distance, not a strong effect."
+    },
+    {
+      "id": "use",
+      "label": "Acts on old evidence",
+      "score": 100.0,
+      "lo": 100.0,
+      "hi": 100.0,
+      "how": "How strongly a clue 100 or more days old moved the answer when asked to pick which field to avoid, as a share of a clue 1 to 10 days old: 0.69 versus 0.46 on the same scale, over 6 ages at 128K tokens and 20 sheep lives.",
+      "cells_used": 6,
+      "note": "Capped at 100: old clues moved the answer at least as much as fresh ones. This means no fading with distance, not a strong effect."
+    }
+  ],
+  "charts": [
+    {
+      "id": "steady",
+      "title": "Does a longer diary help?",
+      "x_label": "Diary length (tokens)",
+      "y_label": "Probability on the true favorite field",
+      "x_log": true,
+      "y_min": 0.0,
+      "y_max": 1.0,
+      "curves": [
+        {
+          "id": "raw_2pt",
+          "label": "Whole diary, tiny gap",
+          "kind": "model",
+          "points": [
+            {
+              "x": 56000.0,
+              "y": 0.2658479361236095,
+              "lo": 0.24786370606482613,
+              "hi": 0.2843321123949891
+            },
+            {
+              "x": 112000.0,
+              "y": 0.27795457243919375,
+              "lo": 0.25583379617138574,
+              "hi": 0.2954366620448549
+            },
+            {
+              "x": 256000.0,
+              "y": 0.2685604205230872,
+              "lo": 0.25030861756105344,
+              "hi": 0.2877461631352723
+            }
+          ]
+        },
+        {
+          "id": "w1000_2pt",
+          "label": "Last 1,000 days, tiny gap",
+          "kind": "model",
+          "points": [
+            {
+              "x": 56000.0,
+              "y": 0.24868747224410376,
+              "lo": 0.22255901971537176,
+              "hi": 0.2779434752989618
+            },
+            {
+              "x": 112000.0,
+              "y": 0.2594638555000225,
+              "lo": 0.23101229452225164,
+              "hi": 0.30059711657293464
+            },
+            {
+              "x": 256000.0,
+              "y": 0.25029042693475884,
+              "lo": 0.23180640964006663,
+              "hi": 0.26943740293509566
+            }
+          ]
+        },
+        {
+          "id": "table_2pt",
+          "label": "All-time tally, tiny gap",
+          "kind": "model",
+          "points": [
+            {
+              "x": 56000.0,
+              "y": 0.382826127509276,
+              "lo": 0.2678796565960084,
+              "hi": 0.5191359361202681
+            },
+            {
+              "x": 112000.0,
+              "y": 0.4978803134430201,
+              "lo": 0.3903533192729774,
+              "hi": 0.5955291997017415
+            },
+            {
+              "x": 256000.0,
+              "y": 0.54746507604296,
+              "lo": 0.4405127853354756,
+              "hi": 0.6306520096474759
+            }
+          ]
+        },
+        {
+          "id": "beta_ceiling_2pt",
+          "label": "Simple counter, tiny gap",
+          "kind": "baseline",
+          "points": [
+            {
+              "x": 56000.0,
+              "y": 0.4307024161009308,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 112000.0,
+              "y": 0.5388723808364866,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 256000.0,
+              "y": 0.6731363998414729,
+              "lo": null,
+              "hi": null
+            }
+          ]
+        },
+        {
+          "id": "raw_7pt",
+          "label": "Whole diary, narrow gap",
+          "kind": "model",
+          "points": [
+            {
+              "x": 1000.0,
+              "y": 0.33040790112068247,
+              "lo": 0.2613999127205536,
+              "hi": 0.4139489379408951
+            },
+            {
+              "x": 4000.0,
+              "y": 0.31337586383024857,
+              "lo": 0.2724680235566478,
+              "hi": 0.36518589610866053
+            },
+            {
+              "x": 16000.0,
+              "y": 0.31839692632357275,
+              "lo": 0.2898933502885854,
+              "hi": 0.3537210417973693
+            },
+            {
+              "x": 56000.0,
+              "y": 0.2975110521912575,
+              "lo": 0.27332267877899025,
+              "hi": 0.3270752964455992
+            }
+          ]
+        },
+        {
+          "id": "w1000_7pt",
+          "label": "Last 1,000 days, narrow gap",
+          "kind": "model",
+          "points": [
+            {
+              "x": 16000.0,
+              "y": 0.3237529236078262,
+              "lo": 0.2930843604002908,
+              "hi": 0.35721288341124424
+            },
+            {
+              "x": 56000.0,
+              "y": 0.2966148071487744,
+              "lo": 0.2597750563906822,
+              "hi": 0.33071893625436966
+            }
+          ]
+        },
+        {
+          "id": "table_7pt",
+          "label": "All-time tally, narrow gap",
+          "kind": "model",
+          "points": [
+            {
+              "x": 1000.0,
+              "y": 0.3822303167080099,
+              "lo": 0.25911127694450176,
+              "hi": 0.5225372518088736
+            },
+            {
+              "x": 4000.0,
+              "y": 0.4321324161292675,
+              "lo": 0.3010439954916188,
+              "hi": 0.5823243161868138
+            },
+            {
+              "x": 16000.0,
+              "y": 0.5490590205416084,
+              "lo": 0.4267288494228362,
+              "hi": 0.6643317017007111
+            },
+            {
+              "x": 56000.0,
+              "y": 0.709645407361289,
+              "lo": 0.5926777083254079,
+              "hi": 0.7882467909474371
+            }
+          ]
+        },
+        {
+          "id": "beta_ceiling_7pt",
+          "label": "Simple counter, narrow gap",
+          "kind": "baseline",
+          "points": [
+            {
+              "x": 1000.0,
+              "y": 0.32641291741053186,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 4000.0,
+              "y": 0.4566016399548397,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 16000.0,
+              "y": 0.5963630943973811,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 56000.0,
+              "y": 0.790372250391528,
+              "lo": null,
+              "hi": null
+            }
+          ]
+        }
+      ],
+      "takeaway": "At 256K tokens the model put 27% on the wolf's real favorite field from the whole diary; simple counting got 67%. With only the last 1,000 days it got 25%. A simple counter would match that with about 0% of the days the model was given."
+    },
+    {
+      "id": "reversal",
+      "title": "When the wolf moves",
+      "x_label": "Days since the swap",
+      "y_label": "How much more the AI points at the new danger field than the old one",
+      "x_log": true,
+      "y_min": -1.0,
+      "y_max": 1.0,
+      "curves": [
+        {
+          "id": "raw_7pt",
+          "label": "Whole diary, narrow gap",
+          "kind": "model",
+          "points": [
+            {
+              "x": 6.0,
+              "y": -0.03527469277381897,
+              "lo": -0.09525729623554824,
+              "hi": 0.018760663030249758
+            },
+            {
+              "x": 16.0,
+              "y": -0.04379425123333931,
+              "lo": -0.10740265826743457,
+              "hi": 0.010741619346042251
+            },
+            {
+              "x": 43.0,
+              "y": -0.030398820588986075,
+              "lo": -0.09016009306449192,
+              "hi": 0.0235363947677241
+            },
+            {
+              "x": 114.0,
+              "y": -0.02898626421888669,
+              "lo": -0.08373877555954085,
+              "hi": 0.018351348408522893
+            },
+            {
+              "x": 304.0,
+              "y": -0.022961534584561977,
+              "lo": -0.07971505242191847,
+              "hi": 0.02744486200077283
+            },
+            {
+              "x": 813.0,
+              "y": -0.02474654937783877,
+              "lo": -0.08800802533190386,
+              "hi": 0.029298132740616576
+            },
+            {
+              "x": 2000.0,
+              "y": -0.007853855465849243,
+              "lo": -0.06676369053092422,
+              "hi": 0.05621801651979946
+            },
+            {
+              "x": 2169.0,
+              "y": -0.010837178528308872,
+              "lo": -0.07020356496314578,
+              "hi": 0.037512578778788906
+            },
+            {
+              "x": 5788.0,
+              "y": 0.016585522542397178,
+              "lo": -0.03632587793588096,
+              "hi": 0.0743653121481818
+            },
+            {
+              "x": 15448.0,
+              "y": 0.037448379769921304,
+              "lo": -0.009011912953531931,
+              "hi": 0.08130122702750356
+            }
+          ]
+        },
+        {
+          "id": "w1000_7pt",
+          "label": "Last 1,000 days, narrow gap",
+          "kind": "model",
+          "points": [
+            {
+              "x": 6.0,
+              "y": -0.008716606448094051,
+              "lo": -0.07117113270583751,
+              "hi": 0.055476105258146974
+            },
+            {
+              "x": 16.0,
+              "y": -0.004898523601392911,
+              "lo": -0.07362669225443697,
+              "hi": 0.05967396751746959
+            },
+            {
+              "x": 43.0,
+              "y": 0.00043844869981209356,
+              "lo": -0.06907045794430085,
+              "hi": 0.06335197564300056
+            },
+            {
+              "x": 114.0,
+              "y": 0.00027116288741429556,
+              "lo": -0.0646507289604823,
+              "hi": 0.06104057930613045
+            },
+            {
+              "x": 304.0,
+              "y": 0.010742249414324756,
+              "lo": -0.04871809208684722,
+              "hi": 0.0652371642996587
+            },
+            {
+              "x": 813.0,
+              "y": 0.0532897079984347,
+              "lo": -0.02009967787627978,
+              "hi": 0.11288224650564262
+            },
+            {
+              "x": 2000.0,
+              "y": 0.055127267036587,
+              "lo": -0.010793728289686187,
+              "hi": 0.11627589022205102
+            },
+            {
+              "x": 2169.0,
+              "y": 0.055127267036587,
+              "lo": -0.010793728289686187,
+              "hi": 0.11627589022205102
+            },
+            {
+              "x": 5788.0,
+              "y": 0.055127267036587,
+              "lo": -0.010793728289686187,
+              "hi": 0.11627589022205102
+            },
+            {
+              "x": 15448.0,
+              "y": 0.055127267036587,
+              "lo": -0.010793728289686187,
+              "hi": 0.11627589022205102
+            }
+          ]
+        },
+        {
+          "id": "ref_filter_7pt",
+          "label": "Change detector, narrow gap",
+          "kind": "baseline",
+          "points": [
+            {
+              "x": 6.0,
+              "y": -0.9929066413861317,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 16.0,
+              "y": -0.9924804004227618,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 43.0,
+              "y": -0.9917137601361515,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 114.0,
+              "y": -0.9885345762110676,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 304.0,
+              "y": -0.9666742572816823,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 813.0,
+              "y": -0.6578662453332195,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 2000.0,
+              "y": 0.3690640750709306,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 2169.0,
+              "y": 0.4706215523711441,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 5788.0,
+              "y": 0.7911690844434959,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 15448.0,
+              "y": 0.8150743745806512,
+              "lo": null,
+              "hi": null
+            }
+          ]
+        },
+        {
+          "id": "ref_w1000_7pt",
+          "label": "Last-1,000-day code, narrow gap",
+          "kind": "baseline",
+          "points": [
+            {
+              "x": 6.0,
+              "y": -0.5408627001892232,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 16.0,
+              "y": -0.5301614881300918,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 43.0,
+              "y": -0.5138726533427084,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 114.0,
+              "y": -0.44122994739691845,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 304.0,
+              "y": -0.21763761386263733,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 813.0,
+              "y": 0.40914173837526935,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 2000.0,
+              "y": 0.578713942575305,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 2169.0,
+              "y": 0.5787139425753048,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 5788.0,
+              "y": 0.578713942575305,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 15448.0,
+              "y": 0.578713942575305,
+              "lo": null,
+              "hi": null
+            }
+          ]
+        },
+        {
+          "id": "raw_high",
+          "label": "Whole diary, wide gap",
+          "kind": "model",
+          "points": [
+            {
+              "x": 6.0,
+              "y": -0.17983517862856388,
+              "lo": -0.24459755328291674,
+              "hi": -0.10211555851291741
+            },
+            {
+              "x": 16.0,
+              "y": -0.20779623880982404,
+              "lo": -0.26691684909660957,
+              "hi": -0.1293627087631471
+            },
+            {
+              "x": 43.0,
+              "y": -0.18540586449205876,
+              "lo": -0.2530715462108577,
+              "hi": -0.09506198419532419
+            },
+            {
+              "x": 114.0,
+              "y": -0.15191088060537972,
+              "lo": -0.21855838612728984,
+              "hi": -0.05359939866807176
+            },
+            {
+              "x": 304.0,
+              "y": -0.1487865517536799,
+              "lo": -0.21581401825468705,
+              "hi": -0.06237290750524091
+            },
+            {
+              "x": 813.0,
+              "y": -0.09648107553521793,
+              "lo": -0.16579108932038467,
+              "hi": 0.00817713481213335
+            },
+            {
+              "x": 2169.0,
+              "y": -0.08314310401678086,
+              "lo": -0.14509874634734873,
+              "hi": 0.01044506443531372
+            },
+            {
+              "x": 5788.0,
+              "y": -0.0035586786270141585,
+              "lo": -0.06313411364966316,
+              "hi": 0.09174413213814943
+            },
+            {
+              "x": 15448.0,
+              "y": 0.1637068174034357,
+              "lo": 0.12064149731657808,
+              "hi": 0.22866246879899238
+            }
+          ]
+        },
+        {
+          "id": "w1000_high",
+          "label": "Last 1,000 days, wide gap",
+          "kind": "model",
+          "points": [
+            {
+              "x": 6.0,
+              "y": -0.14175454329699277,
+              "lo": -0.21032342594008696,
+              "hi": -0.023694030405061642
+            },
+            {
+              "x": 16.0,
+              "y": -0.11273089749117696,
+              "lo": -0.18107677470220887,
+              "hi": 0.016986785193814274
+            },
+            {
+              "x": 43.0,
+              "y": -0.03788103483617306,
+              "lo": -0.104172955581051,
+              "hi": 0.07072775724600144
+            },
+            {
+              "x": 114.0,
+              "y": 0.003469200742741428,
+              "lo": -0.06057687202659823,
+              "hi": 0.1064775997926818
+            },
+            {
+              "x": 304.0,
+              "y": 0.0797227185840408,
+              "lo": 0.024593984183167314,
+              "hi": 0.1568575641312972
+            },
+            {
+              "x": 813.0,
+              "y": 0.18614382618417344,
+              "lo": 0.12736070702436803,
+              "hi": 0.25778340393774124
+            },
+            {
+              "x": 2169.0,
+              "y": 0.2290766259965798,
+              "lo": 0.16668698260634363,
+              "hi": 0.2928970870937916
+            },
+            {
+              "x": 5788.0,
+              "y": 0.2290766259965798,
+              "lo": 0.16668698260634363,
+              "hi": 0.2928970870937916
+            },
+            {
+              "x": 15448.0,
+              "y": 0.2290766259965798,
+              "lo": 0.16668698260634363,
+              "hi": 0.2928970870937916
+            }
+          ]
+        },
+        {
+          "id": "ref_filter_high",
+          "label": "Change detector, wide gap",
+          "kind": "baseline",
+          "points": [
+            {
+              "x": 6.0,
+              "y": -0.9985888515433718,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 16.0,
+              "y": -0.9359175301853463,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 43.0,
+              "y": -0.10320543646017231,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 114.0,
+              "y": 0.8875355097041634,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 304.0,
+              "y": 0.9938322591378561,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 813.0,
+              "y": 0.9940254798781966,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 2169.0,
+              "y": 0.9940262992488481,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 5788.0,
+              "y": 0.9940245802577736,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 15448.0,
+              "y": 0.9940258833851628,
+              "lo": null,
+              "hi": null
+            }
+          ]
+        },
+        {
+          "id": "ref_w1000_high",
+          "label": "Last-1,000-day code, wide gap",
+          "kind": "baseline",
+          "points": [
+            {
+              "x": 6.0,
+              "y": -0.9996297315590897,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 16.0,
+              "y": -0.999417059793035,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 43.0,
+              "y": -0.998625985395451,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 114.0,
+              "y": -0.9928875043121422,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 304.0,
+              "y": -0.8518985296864874,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 813.0,
+              "y": 0.9822022420836376,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 2169.0,
+              "y": 0.9998384334625744,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 5788.0,
+              "y": 0.9998384334625744,
+              "lo": null,
+              "hi": null
+            },
+            {
+              "x": 15448.0,
+              "y": 0.9998384334625743,
+              "lo": null,
+              "hi": null
+            }
+          ]
+        }
+      ],
+      "takeaway": "In a 22,069-day diary, after the safest and most dangerous fields swapped, on the narrow gap the whole diary switched to the new danger field once the swap was about 3,197 days old; on the wide gap the whole diary switched to the new danger field once the swap was about 5,910 days old."
+    },
+    {
+      "id": "ladder",
+      "title": "Does an old clue still count?",
+      "x_label": "Days since the clue",
+      "y_label": "How much the clue changed the answer",
+      "x_log": true,
+      "y_min": -0.014532744996165803,
+      "y_max": 4.748381617384587,
+      "curves": [
+        {
+          "id": "report",
+          "label": "Where wolves were seen",
+          "kind": "model",
+          "points": [
+            {
+              "x": 1.0,
+              "y": 1.5091977375438739,
+              "lo": 1.046135592650758,
+              "hi": 1.9345053636214875
+            },
+            {
+              "x": 3.0,
+              "y": 2.2127076126080514,
+              "lo": 1.6342709156075501,
+              "hi": 3.029220706444985
+            },
+            {
+              "x": 10.0,
+              "y": 1.614242663638271,
+              "lo": 1.2419154673888624,
+              "hi": 2.0566055172230153
+            },
+            {
+              "x": 100.0,
+              "y": 1.890307959925631,
+              "lo": 1.419114440381622,
+              "hi": 2.4615289916945677
+            },
+            {
+              "x": 300.0,
+              "y": 1.612915144708301,
+              "lo": 1.0944146555207817,
+              "hi": 2.082847468762825
+            },
+            {
+              "x": 1000.0,
+              "y": 1.8126727123793003,
+              "lo": 1.366107902882756,
+              "hi": 2.3386256793709452
+            },
+            {
+              "x": 1900.0,
+              "y": 1.9231271355194965,
+              "lo": 1.4694573575743246,
+              "hi": 2.4989829715500984
+            },
+            {
+              "x": 5000.0,
+              "y": 2.0083855346618296,
+              "lo": 1.5253616059387523,
+              "hi": 2.713861036497536
+            },
+            {
+              "x": 12921.0,
+              "y": 3.6991559881791978,
+              "lo": 2.9844273274967943,
+              "hi": 4.748381617384587
+            }
+          ]
+        },
+        {
+          "id": "decide",
+          "label": "Which field to avoid",
+          "kind": "model",
+          "points": [
+            {
+              "x": 1.0,
+              "y": 0.2591279380927182,
+              "lo": -0.014532744996165803,
+              "hi": 0.4973615660591345
+            },
+            {
+              "x": 3.0,
+              "y": 0.6182468701401176,
+              "lo": 0.40006780878567205,
+              "hi": 0.8781160906943211
+            },
+            {
+              "x": 10.0,
+              "y": 0.5127715729192581,
+              "lo": 0.27040923338416706,
+              "hi": 0.9948776554957574
+            },
+            {
+              "x": 100.0,
+              "y": 0.8118309633140447,
+              "lo": 0.4521179108297575,
+              "hi": 1.301845571175063
+            },
+            {
+              "x": 300.0,
+              "y": 0.4720107188537285,
+              "lo": 0.16839925123276506,
+              "hi": 0.7925523017951657
+            },
+            {
+              "x": 1000.0,
+              "y": 0.6065739269706805,
+              "lo": 0.3500594962700963,
+              "hi": 0.9666919586468012
+            },
+            {
+              "x": 1900.0,
+              "y": 0.5780179257966604,
+              "lo": 0.2553183837993338,
+              "hi": 0.9428302906705014
+            },
+            {
+              "x": 5000.0,
+              "y": 0.6213193234136611,
+              "lo": 0.306405939564352,
+              "hi": 1.0106429094433704
+            },
+            {
+              "x": 12921.0,
+              "y": 1.0388093122645983,
+              "lo": 0.7905274898931172,
+              "hi": 1.3886963609997687
+            }
+          ]
+        }
+      ],
+      "takeaway": "At 128K tokens, a clue 1 day old moved the 'where seen' answer by 1.5 and the 'avoid' answer by 0.3 (0 is no effect); at 12,921 days the same clue moved them by 3.7 and 1.0."
+    }
+  ],
+  "harness": [
+    {
+      "policy": "w1000",
+      "label": "Last 1,000 days",
+      "rescue": 0.02848409143007464,
+      "value_added": -0.006102918591211779,
+      "tokens_per_decision": 12186,
+      "usd_per_life": 10.24
+    },
+    {
+      "policy": "e700",
+      "label": "Recency-weighted tally",
+      "rescue": 0.005806324634955998,
+      "value_added": 0.018347340546550024,
+      "tokens_per_decision": 677,
+      "usd_per_life": 0.128
+    },
+    {
+      "policy": "table",
+      "label": "All-time tally",
+      "rescue": 0.20416914359768273,
+      "value_added": -0.044460345885391446,
+      "tokens_per_decision": 658,
+      "usd_per_life": 0.128
+    },
+    {
+      "policy": "oracle",
+      "label": "Told the answer",
+      "rescue": 0.33727471736038006,
+      "value_added": -0.36671747227509827,
+      "tokens_per_decision": 497,
+      "usd_per_life": 0.0256
+    },
+    {
+      "policy": "shuffled",
+      "label": "Shuffled diary (control)",
+      "rescue": 0.03576001640564452,
+      "value_added": null,
+      "tokens_per_decision": 70627,
+      "usd_per_life": 163.84
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "H1",
+      "statement": "History beyond the last 1,000 days adds information at 256K tokens, when the gap between fields is tiny.",
+      "verdict": "not supported",
+      "effect": 0.018269993588328363,
+      "lo": -0.00230318269823776,
+      "hi": 0.03974859566917413,
+      "p_holm": 0.08039196080391961,
+      "seeds_used": 30,
+      "seeds_expected": 30,
+      "note": null
+    },
+    {
+      "id": "H2",
+      "statement": "At 128K tokens the model can report old evidence it no longer acts on.",
+      "verdict": "untestable",
+      "effect": null,
+      "lo": null,
+      "hi": null,
+      "p_holm": null,
+      "seeds_used": 20,
+      "seeds_expected": 20,
+      "note": "The report answer has saturated: three times the evidence moved it only 0.46x as far, so an old-clue ratio would not measure memory."
+    },
+    {
+      "id": "H3",
+      "statement": "After a reversal 2,000 days ago, the last 1,000 days beat the full diary at 256K tokens.",
+      "verdict": "not supported",
+      "effect": 0.023780641704797746,
+      "lo": 0.004129255384241963,
+      "hi": 0.04855372189181262,
+      "p_holm": 0.0275972402759724,
+      "seeds_used": 30,
+      "seeds_expected": 30,
+      "note": null
+    }
+  ],
+  "max_tokens_tested": 256000,
+  "probabilities_source": "model",
+  "calls": 10020,
+  "input_tokens": 560470902,
+  "usd_spent": 22.41883607999981,
+  "seeds": 30,
+  "verdict_line": "Overall 38/100; reads a long diary: 13/100; follows the wolf when it moves: 3/100; still acts on old clues: 100/100. Old-clue score capped: no fading with distance, but the effect is small.",
+  "generated_at": "2026-11-09T10:55:43.461679+00:00",
+  "flock_shared": 45.358977473517704,
+  "shared_length_tokens": 16000,
+  "registration_url": null
+}
