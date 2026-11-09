@@ -13,8 +13,10 @@ from swb.contracts import Job, ModelEntry, Policy, ResultRow, WorldKind
 from swb.runner.jobs import W1000_DAYS
 
 TOKEN_TOLERANCE = 0.05
-# Pilot overhead was fitted on a few questions; repeated option orders add about 40 tokens each.
-QUESTION_TOKEN_ALLOWANCE = 80
+# Pilot overhead was fitted on a few questions. Each extra question costs 40 tokens on Snap and
+# about 260 on Jev, so a request may run this far over. Truncation shows up as too few tokens,
+# which gets no allowance.
+QUESTION_TOKEN_ALLOWANCE = 300
 _LENGTH_POLICIES: tuple[Policy, ...] = ("raw", "w1000", "shuffled")
 # The pilot measures steady and ladder diaries; reversal days read exactly like steady days.
 _REVERSAL_AS: WorldKind = "steady"
@@ -120,6 +122,6 @@ def token_problem(
         return None
     expected = expected_tokens(job, rate)
     allowance = QUESTION_TOKEN_ALLOWANCE * len(job.question_keys) * job.replicates
-    if abs(tokens - expected) > TOKEN_TOLERANCE * expected + allowance:
+    if not expected * (1 - TOKEN_TOLERANCE) <= tokens <= expected * (1 + TOKEN_TOLERANCE) + allowance:
         return f"reported {tokens:,} input tokens, expected about {expected:,.0f}"
     return None
